@@ -1,0 +1,29 @@
+.Sidebar{
+  height: 100vh;
+  flex-basis: 220px;
+  background-color: #fff;
+  order: 0;
+  flex-shrink: 0;
+  color:#000;
+  font-weight: 350;
+  font-size: 14px;
+  font-family: "Whitney-Medium";
+  font-weight: 500;
+  box-shadow: 37px 0px 85px -26px rgba(166,166,166,1);
+
+}
+.Brand{
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  height:70px;
+  font-weight: bold;
+  font-size: 22px;
+  font-family: "Whitney-BoldSC";
+  margin-left: 15px;
+
+}
+.Logo{
+
+  margin: 0 15px 0 5px;
+}
