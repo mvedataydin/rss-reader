@@ -9,8 +9,15 @@
   font-size: 14px;
   font-family: "Whitney-Medium";
   font-weight: 500;
-  box-shadow: 11px 0px 21px 0px rgba(0,0,0,0.05);
+  box-shadow: 11px 0px 60px -26px rgba(0,0,0,0.08);
   z-index: 3;
+  overflow-y: auto;
+    nav{
+      ul{
+        padding: 0px;
+        margin: 0px;
+      }
+    }
 }
   
 .Brand{
@@ -27,4 +34,20 @@
 .Logo{
 
   margin: 0 15px 0 5px;
+}
+
+.Sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.Sidebar::-webkit-scrollbar-track {
+
+  border-radius: 0px;
+}
+ 
+/* Handle */
+.Sidebar::-webkit-scrollbar-thumb {
+  background: #38f9d7; 
+  border-radius: 0px;
 }

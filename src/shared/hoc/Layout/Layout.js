@@ -5,7 +5,7 @@ import classes from './Layout.module.scss';
 const Layout = (props) => {
   return (
     <div className={classes.Layout}>
-      <Sidebar />
+      <Sidebar sources={props.sources} onFeedClick={props.onFeedClick}/>
       {props.children}
     </div>
   )

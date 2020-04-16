@@ -1,11 +1,36 @@
 .FeedDetail{
   display: flex;
+  flex-direction: column;
   height: 100vh;
   flex-basis: 480px;
   background-color: #fff;
   order: 2;
   flex-grow: 1;
   min-width: 300px;
+  flex-direction: column;
+  font-family: "Whitney-Book";
+  font-size: 16px;
 
   //130 for min window width #00adb5
+}
+.FeedListToolbar{
+  height: 50px;
+  flex-shrink: 0;
+  border-bottom:0.1px solid #000;
+}
+
+.FeedDetail::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.FeedDetail::-webkit-scrollbar-track {
+
+  border-radius: 0px;
+}
+ 
+/* Handle */
+.FeedDetail::-webkit-scrollbar-thumb {
+  background: #38f9d7; 
+  border-radius: 0px;
 }

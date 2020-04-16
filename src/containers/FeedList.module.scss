@@ -1,9 +1,63 @@
 .FeedList{
+  display: flex;
+  flex-direction: column;
   height: 100vh;
   flex-basis: 300px;
   background-color: #fff;
   order: 1;
   flex-shrink: 0;
-  box-shadow: 11px 0px 21px 0px rgba(0,0,0,0.05);
+  box-shadow: 11px 0px 60px -26px rgba(0,0,0,0.08);
   z-index: 2;
+  overflow-y: auto;
+  font-family: "Whitney-Book";
+
+}
+
+.FeedListToolbar{
+  position: fixed;
+  height: 50px;
+  width: 300px;
+  border-bottom:0.1px solid #000;
+  background-color: white;
+}
+
+.FeedItem{
+}
+.FeedListContainer{
+  margin-top: 50px;
+  overflow-x: hidden;
+
+}
+
+.Source{
+
+}
+
+.Title{
+
+}
+
+.Date{
+
+}
+
+.Author{
+
+}
+
+
+.FeedListContainer::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.FeedListContainer::-webkit-scrollbar-track {
+
+  border-radius: 0px;
+}
+ 
+/* Handle */
+.FeedListContainer::-webkit-scrollbar-thumb {
+  background: #38f9d7; 
+  border-radius: 0px;
 }

@@ -1,9 +1,12 @@
 import React from 'react';
 
 import classes from './Navigation.module.scss';
-import { List, Settings, Grid,Info, Star,Plus } from 'react-feather';
+import { List, Settings, Grid,Info, Star,Plus,Rss } from 'react-feather';
 
-const Navigation = () => {
+const Navigation = (props) => {
+  const handleFeedClicked = (source) => {
+    props.onFeedClick(source);
+  }
   return (
     <ul>
       <li >
@@ -42,6 +45,17 @@ const Navigation = () => {
           <span className={classes.ItemText}>About</span>
         </div>
       </li>
+      <hr/>
+      {props.sources.map((source,index)=> {
+        return(
+          <li key={index}>
+            <div className={classes.NavigationItem} onClick={() => handleFeedClicked(source.url)}>
+              <Rss strokeWidth = "3" size={18} className={classes.ItemIcon} />
+              <span className={classes.ItemText}>{source.title}</span>
+            </div>
+          </li>
+        );
+      })}
     </ul>
   )
 };
