@@ -9,10 +9,11 @@ const Sidebar = (props) => {
   return (
     <aside className={classes.Sidebar}>
       <div className={classes.Brand}>
-        <span>RssReady</span> 
+        <span className={classes.Logo}></span>
+        <span className={classes.BrandName}>Flame</span> 
       </div>
       <nav>
-        <Navigation sources={props.sources} onFeedClick={props.onFeedClick}/>
+        <Navigation onAddFeedClick={props.onAddFeedClick} dataList={props.dataList} onFeedClick={props.onFeedClick}/>
       </nav>
     </aside>
   )

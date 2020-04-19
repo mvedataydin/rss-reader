@@ -1,3 +1,5 @@
+
+
 const parseDomDocument = (data) => {
   const feedSource = (data.querySelector('title'))? data.querySelector('title').innerHTML : null;
 
@@ -9,14 +11,14 @@ const parseDomDocument = (data) => {
   const feeds = items.map(item =>{
     const feedTitle = item.querySelector('title') ? item.querySelector('title').innerHTML : null;
     
-    const feedDesc = item.querySelector('description') ? item.querySelector('description').textContent 
-    : item.querySelector('content') ? item.querySelector('content').textContent : null;
-    
+    const feedDesc = item.querySelector('description') ? item.querySelector('description') 
+    : item.querySelector('content') ? item.querySelector('content') : null;
+
     const feedAuthor = item.querySelector('creator') ? item.querySelector('creator').innerHTML 
     : item.querySelector('author') ? item.querySelector('author').querySelector('name').innerHTML : null;
    
     const feedLink = item.querySelector('guid') ? item.querySelector('guid').innerHTML 
-    : item.querySelector('id') ? item.querySelector('id').innerHTML : null  ; ;
+    : item.querySelector('id') ? item.querySelector('id').innerHTML : null  ;
     
     const feedDate = item.querySelector('pubDate') ? item.querySelector('pubDate').innerHTML 
     : item.querySelector('published') ? item.querySelector('published').innerHTML : null  ;
