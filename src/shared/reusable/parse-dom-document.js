@@ -88,4 +88,4 @@ const formatDate = (dateString) => {
   }
 }
 
-export default parseDomDocument;
+export  {parseDomDocument, formatDate};

@@ -19,6 +19,11 @@ function App() {
       exists = item.title !== data.title ? false : true;
     })
     if(!exists){
+      data.items.map(item => {
+        item.sourceTitle = data.title;
+        item.favicon = data.favicon;
+        item.favourite = false;
+      })
       setDataList([
         ...dataList,
         data
@@ -46,14 +51,14 @@ function App() {
     //     .catch(e=> {
     //       console.log(e)
     //     })
-    //   })     
-    console.log(data);
+    //   })
     setSelectedFeedData(data);
+    setSelectedFeedItem({});     
+
   }
 
   const addFeedClickHandler = () => {
     setShowAddFeed(true);
-    console.log('yey');
   }
   const ModalClickHandler = () => {
     setShowAddFeed(false);
@@ -62,11 +67,26 @@ function App() {
     setSelectedFeedItem(clickedFeedData);
   }
 
+  const toggleFavouriteHandler = () => {
+    let index = selectedFeedData.items.indexOf(selectedFeedItem);
+    if(selectedFeedItem.favourite === false){
+      setSelectedFeedItem({...selectedFeedItem, favourite: true})
+      selectedFeedData.items[index].favourite = true;
+    }else if(selectedFeedItem.favourite === true){
+      setSelectedFeedItem({...selectedFeedItem, favourite: false})
+      selectedFeedData.items[index].favourite = false;
+    }
+  }
+
+  const allFeedsClickHandler = () => {
+
+  }
+
   return (
     <>
-      <Layout dataList={dataList} onFeedClick={feedClickHandler} onAddFeedClick={addFeedClickHandler}>
+      <Layout dataList={dataList} onFeedClick={feedClickHandler} onAddFeedClick={addFeedClickHandler} onAllFeedsClick={allFeedsClickHandler}>
         <FeedList feedData={selectedFeedData} onFeedItemClick={feedItemClickHandler} />
-        <FeedDetail feedItemData={selectedFeedItem} />
+        <FeedDetail feedItemData={selectedFeedItem} onFavButtonClick={toggleFavouriteHandler} />
       </Layout>
       {showAddFeed ? <AddSourceForm onModalClick={ModalClickHandler} onAddSource={addSourceHandler}/> : null}
     </>

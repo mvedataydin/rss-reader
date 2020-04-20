@@ -16,7 +16,7 @@ const Navigation = (props) => {
         </div>
       </li>
       <li>
-        <div className={classes.NavigationItem}>
+        <div className={classes.NavigationItem} onClick={props.onAllFeedsClick}>
           <List size={18} className={classes.ItemIcon} />
           <span className={classes.ItemText}>All Feeds</span>
         </div>
@@ -47,6 +47,7 @@ const Navigation = (props) => {
       </li>
       <span className={`${classes.NavigationItem} ${classes.Subscriptions}`}>SUBSCRIPTIONS</span>
       {props.dataList.map((item,index)=> {
+        item.title = item.title.length >= 26 ?  item.title.substring(0,19) + '...': item.title;
         return(
           <li key={index}>
             <div className={`${classes.NavigationItem} ${classes.FeedItem}`} onClick={() => handleFeedClicked(item)}>

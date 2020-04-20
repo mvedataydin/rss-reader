@@ -14,15 +14,17 @@
   //130 for min window width #00adb5
 }
 .FeedDetailToolbar{
+  display: flex;
+  flex-grow: 0;
   flex-shrink: 0;
   height: 40px;
-  width: 100vw;
   background-color: white;
   border-bottom: 0.1px solid rgb(216, 216, 216);
-  display: flex;
   align-items: center;
   justify-content: left;
   font-family: 'OpenSans-Regular';
+  flex-wrap: wrap;
+
 }
 
 .FeedDetailContainer{
@@ -68,6 +70,7 @@
 }
 
 .ItemIcon{
+
   margin-right: 3px;
   margin-left: 10px;
 }
@@ -82,4 +85,13 @@
 .SourceContainer{
   display: flex;
   align-items: center;
+  flex-grow: 1;
+  flex-wrap: wrap;
 }
+
+.FavButton{
+  margin-left: auto;
+  cursor: pointer;
+  margin-right: 15px;
+}
+

@@ -30,8 +30,7 @@ const AddSourceForm = props => {
     
     if(data){
       let url = enteredUrl.split(/([^\/]*\/){3}/) ;
-      url = enteredUrl.includes('http') ? url[1] : url[0];
-      console.log(url);
+      url = enteredUrl.includes('http') ? url[1] : url[1];
       let favicon = `https://s2.googleusercontent.com/s2/favicons?domain_url=${url}`;
       data = {...data, favicon: favicon};
       setShowError(false);
