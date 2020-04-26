@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classes from './Navigation.module.scss';
-import { List, Settings, Grid,Info, Star,Plus,Rss } from 'react-feather';
+import { List, Settings, Grid,Info, Star,Plus } from 'react-feather';
 
 const Navigation = (props) => {
   const handleFeedClicked = (source) => {
@@ -22,7 +22,7 @@ const Navigation = (props) => {
         </div>
       </li>
       <li>
-        <div className={classes.NavigationItem}>
+        <div className={classes.NavigationItem} onClick={props.onFavFeedsClick}>
           <Star size={18} className={classes.ItemIcon} />
           <span className={classes.ItemText}>Favourites</span>
         </div>

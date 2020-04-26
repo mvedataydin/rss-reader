@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './FeedDetail.module.scss';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
-import {Star} from 'react-feather';
+import {Star, Globe} from 'react-feather';
 import {formatDate} from '../shared/reusable/parse-dom-document';
 
 
@@ -20,6 +20,7 @@ const FeedDetail = (props) => {
       <div className={classes.SourceContainer}>
         <img className={classes.ItemIcon} src = {props.feedItemData.favicon} alt='favicon' />
         <span className={classes.Source}>{props.feedItemData.sourceTitle.length >= 26 ? props.feedItemData.sourceTitle.substring(0,19): props.feedItemData.sourceTitle}</span>
+        <Globe size={18} className={classes.GlobeButton} onClick={null}/>
         <Star size={18} fill={color} className={classes.FavButton} onClick={props.onFavButtonClick}/>
       </div>
      : null}

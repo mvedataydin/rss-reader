@@ -26,6 +26,8 @@
   align-self: center;
   margin-left: auto;
   margin-right: 10px;
+  color: #444444;
+
 }
 .ToolbarSyncIcon{
   align-self: center;
@@ -52,7 +54,7 @@
 .Source{
   flex: 0 72%;
   font-size: 12.5px;
-  color: #ff5e00;
+  color: #444444;
 
 
 }
@@ -83,4 +85,27 @@
   margin-right: 3px;
   flex: 0 5%;
 
+}
+
+.ToolbarSearch{
+  display: flex;
+  align-self: center;
+  margin-left: 10px;
+  margin-right: auto;
+}
+
+.ToolbarSearchIcon{
+  align-self: center;
+  margin-left: 5px;
+  color: #444444;
+
+}
+
+.ToolbarSearchInput{
+  margin-left: 15px;
+  border: none;
+  outline: none;
+  font-family: 'OpenSans-Regular';
+  color: #444444;
+  font-size: 15px;
 }

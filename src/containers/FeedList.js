@@ -1,10 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from './FeedList.module.scss';
-import {Globe, RefreshCw} from 'react-feather';
+import { RefreshCw, Search} from 'react-feather';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import {formatDate} from '../shared/reusable/parse-dom-document';
 const FeedList = (props) => {
+  const [enteredText, setEnteredText] = useState('');
 
   const feedItemClickHandler = (clickedFeedData) => {
     props.onFeedItemClick(clickedFeedData);
@@ -12,6 +13,14 @@ const FeedList = (props) => {
   return (
   <section className={classes.FeedList}>
     <section className={classes.FeedListToolbar}>
+      <div className={classes.ToolbarSearch}>
+        <Search size={18}  className={classes.ToolbarSearchIcon}/> 
+        <input className={classes.ToolbarSearchInput} value={enteredText} 
+        placeholder='Search' onChange={ event => {
+          setEnteredText(event.target.value);
+        }}
+        />
+      </div>
       <div className={classes.ToolbarSync}>
         <RefreshCw size={18}  className={classes.ToolbarSyncIcon}/> 
         <span className={classes.ToolbarSyncText}>Sync</span>
@@ -19,7 +28,8 @@ const FeedList = (props) => {
     </section>
 
     <SimpleBar style={{maxHeight: 'calc(100vh - 40px)' }} className={classes.FeedListContainer}>
-      {props.feedData.items ? props.feedData.items.map((feed, index) => 
+      {props.feedData.items ? props.feedData.items.map((feed, index) =>{
+        return feed.title.toLowerCase().includes(enteredText.toLowerCase()) ? 
       (
         <div key={index}>
         <div className={classes.FeedItem} onClick={() => feedItemClickHandler(feed)}>
@@ -31,7 +41,56 @@ const FeedList = (props) => {
         </div>
         <hr/>
         </div>
-      )):null}
+      ):null
+      }):null}
+      {props.showAll ? props.feedData.map((data,index) => {
+        return(
+          <div key={index}>
+            {
+              data.items.map((feed, index) => {
+                return feed.title.toLowerCase().includes(enteredText.toLowerCase()) ? 
+                (
+                <div key={index}>
+                  <div className={classes.FeedItem} onClick={() => feedItemClickHandler(feed)}>
+                    <img className={classes.ItemIcon} src = {data.favicon} alt='favicon' />
+                    <span className={classes.Source}>{data.title.length >= 26 ? data.title.substring(0.19) + '...' : data.title}</span>
+                    <span className={classes.Date}>{feed.pubDate ? formatDate(feed.pubDate): null}</span>
+                    <div className={classes.Title}>{feed.title}</div>
+                    <div className={classes.Author}>by: {feed.author ? feed.author : 'Author not found'}</div>
+                  </div>
+                <hr/>
+                </div>
+              ): null
+              })
+            }
+          </div>
+        )
+      }):null}
+      {props.showFav ? props.feedData.map((data,index) => {
+        return(
+          <div key={index}>
+            {
+              data.items.map((feed, index) => 
+              (
+                <div key={index}>
+                {feed.favourite && feed.title.toLowerCase().includes(enteredText.toLowerCase()) ? 
+                  <div key={index}>
+                    <div className={classes.FeedItem} onClick={() => feedItemClickHandler(feed)}>
+                      <img className={classes.ItemIcon} src = {data.favicon} alt='favicon' />
+                      <span className={classes.Source}>{data.title.length >= 26 ? data.title.substring(0.19) + '...' : data.title}</span>
+                      <span className={classes.Date}>{feed.pubDate ? formatDate(feed.pubDate): null}</span>
+                      <div className={classes.Title}>{feed.title}</div>
+                      <div className={classes.Author}>by: {feed.author ? feed.author : 'Author not found'}</div>
+                    </div>
+                  <hr/>
+                  </div>
+                : null}            
+                </div>
+              ))
+            }
+          </div>
+        )
+      }):null}
     </SimpleBar>
 
   </section>

@@ -13,7 +13,7 @@ const Sidebar = (props) => {
         <span className={classes.BrandName}>Flame</span> 
       </div>
       <nav>
-        <Navigation onAddFeedClick={props.onAddFeedClick} onAllFeedsClick={props.onAllFeedsClick} dataList={props.dataList} onFeedClick={props.onFeedClick}/>
+        <Navigation onAddFeedClick={props.onAddFeedClick} onAllFeedsClick={props.onAllFeedsClick} onFavFeedsClick={props.onFavFeedsClick} dataList={props.dataList} onFeedClick={props.onFeedClick}/>
       </nav>
     </aside>
   )

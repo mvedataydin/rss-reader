@@ -3,7 +3,6 @@ import Layout from './shared/hoc/Layout/Layout';
 import FeedList from './containers/FeedList';
 import FeedDetail from './containers/FeedDetail';
 import AddSourceForm from './shared/components/AddSourceForm';
-import parseDomDocument from './shared/reusable/parse-dom-document';
 import './App.scss';
 
 function App() {
@@ -12,6 +11,8 @@ function App() {
   const [selectedFeedData, setSelectedFeedData] = useState([]);
   const [selectedFeedItem, setSelectedFeedItem] = useState({});
   const [showAddFeed, setShowAddFeed] = useState(false);
+  const [showAllFeeds, setShowAllFeeds] = useState(false);
+  const [showFavFeeds, setShowFavFeeds] = useState(false);
 
   const addSourceHandler = (data) => {
     let exists = false;
@@ -32,27 +33,9 @@ function App() {
     setShowAddFeed(false);
   }
   const feedClickHandler = (data) => {
-    // const RSS_URL = `https://cors-anywhere.herokuapp.com/${url}`;
-    // fetch(RSS_URL)
-    //   .then(response => response.text())
-    //   .then(str => new window.DOMParser().parseFromString(str, 'text/xml'))
-    //   .then(data => {
-    //     const feeds = parseDomDocument(data);
-    //     setSelectedFeedData(feeds);
-    //   })
-    //   .catch(() => {
-    //     fetch(url,{mode:'cors'})
-    //       .then(response => response.text())
-    //       .then(str => new window.DOMParser().parseFromString(str, 'text/xml'))
-    //       .then(data => {
-    //         const feeds = parseDomDocument(data);
-    //         setSelectedFeedData(feeds);
-    //     })
-    //     .catch(e=> {
-    //       console.log(e)
-    //     })
-    //   })
     setSelectedFeedData(data);
+    setShowAllFeeds(false);
+    setShowFavFeeds(false);
     setSelectedFeedItem({});     
 
   }
@@ -71,21 +54,37 @@ function App() {
     let index = selectedFeedData.items.indexOf(selectedFeedItem);
     if(selectedFeedItem.favourite === false){
       setSelectedFeedItem({...selectedFeedItem, favourite: true})
-      selectedFeedData.items[index].favourite = true;
+      let data = {...selectedFeedData}
+      let item = {...data.items[index]}
+      item.favourite = true;
+      data.items[index] = item;
+      setSelectedFeedData(data);
     }else if(selectedFeedItem.favourite === true){
       setSelectedFeedItem({...selectedFeedItem, favourite: false})
-      selectedFeedData.items[index].favourite = false;
+      let data = {...selectedFeedData}
+      let item = {...data.items[index]}
+      item.favourite = false;
+      data.items[index] = item;
+      setSelectedFeedData(data);
     }
   }
 
   const allFeedsClickHandler = () => {
+    setShowAllFeeds(true);
+    setShowFavFeeds(false);
+    setSelectedFeedItem({});     
 
   }
+  const favFeedsClickHandler = () => {
+    setShowFavFeeds(true);
+    setShowAllFeeds(false);
+    setSelectedFeedItem({});     
 
+  }
   return (
     <>
-      <Layout dataList={dataList} onFeedClick={feedClickHandler} onAddFeedClick={addFeedClickHandler} onAllFeedsClick={allFeedsClickHandler}>
-        <FeedList feedData={selectedFeedData} onFeedItemClick={feedItemClickHandler} />
+      <Layout dataList={dataList} onFeedClick={feedClickHandler} onAddFeedClick={addFeedClickHandler} onAllFeedsClick={allFeedsClickHandler} onFavFeedsClick={favFeedsClickHandler}>
+        <FeedList feedData={showAllFeeds ? dataList : showFavFeeds ? dataList : selectedFeedData} onFeedItemClick={feedItemClickHandler} showFav={showFavFeeds} showAll={showAllFeeds}/>
         <FeedDetail feedItemData={selectedFeedItem} onFavButtonClick={toggleFavouriteHandler} />
       </Layout>
       {showAddFeed ? <AddSourceForm onModalClick={ModalClickHandler} onAddSource={addSourceHandler}/> : null}
