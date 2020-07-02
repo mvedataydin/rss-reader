@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import Layout from './shared/hoc/Layout/Layout';
 import FeedList from './containers/FeedList';
 import FeedDetail from './containers/FeedDetail';
 import AddSourceForm from './shared/components/AddSourceForm';
 import './App.scss';
+import { Save } from 'react-feather';
 
 function App() {
   
@@ -29,6 +31,7 @@ function App() {
         ...dataList,
         data
       ])
+      indexDataToElasticSearch(data.items);
     }
     setShowAddFeed(false);
   }
@@ -79,6 +82,18 @@ function App() {
     setShowFavFeeds(true);
     setShowAllFeeds(false);
     setSelectedFeedItem({});     
+
+  }
+  const indexDataToElasticSearch = async (data) => {
+    let res = await axios.post('http://127.0.0.1:3001/index', data)
+
+    console.log(`Status code: ${res.status}`);
+    console.log(`Status text: ${res.statusText}`);
+    console.log(`Request method: ${res.request.method}`);
+    console.log(`Path: ${res.request.path}`);
+
+    console.log(`Date: ${res.headers.date}`);
+    console.log(`Data: ${res.data}`);
 
   }
   return (

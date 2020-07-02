@@ -1,14 +1,24 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 import classes from './FeedList.module.scss';
 import { RefreshCw, Search} from 'react-feather';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.min.css';
 import {formatDate} from '../shared/reusable/parse-dom-document';
+
+
 const FeedList = (props) => {
   const [enteredText, setEnteredText] = useState('');
-
   const feedItemClickHandler = (clickedFeedData) => {
     props.onFeedItemClick(clickedFeedData);
+  }
+  const handleSearchChanged = (e) => {
+    let enteredVal = e.target.value;
+    setEnteredText(enteredVal);
+    axios.get("http://127.0.0.1:3001/search?q=" + e.target.value)
+    .then(response => {
+        console.log(response);
+    })
   }
   return (
   <section className={classes.FeedList}>
@@ -17,7 +27,7 @@ const FeedList = (props) => {
         <Search size={18}  className={classes.ToolbarSearchIcon}/> 
         <input className={classes.ToolbarSearchInput} value={enteredText} 
         placeholder='Search' onChange={ event => {
-          setEnteredText(event.target.value);
+          handleSearchChanged(event);
         }}
         />
       </div>

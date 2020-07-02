@@ -20,7 +20,7 @@ const FeedDetail = (props) => {
       <div className={classes.SourceContainer}>
         <img className={classes.ItemIcon} src = {props.feedItemData.favicon} alt='favicon' />
         <span className={classes.Source}>{props.feedItemData.sourceTitle.length >= 26 ? props.feedItemData.sourceTitle.substring(0,19): props.feedItemData.sourceTitle}</span>
-        <Globe size={18} className={classes.GlobeButton} onClick={null}/>
+        <Globe size={18} className={classes.GlobeButton} onClick={()=> window.open(props.feedItemData.link, "_blank")}/>
         <Star size={18} fill={color} className={classes.FavButton} onClick={props.onFavButtonClick}/>
       </div>
      : null}
